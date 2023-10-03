@@ -14,3 +14,6 @@ for (i = 0; i < 5; i++) {
     string += "<br>"
 }
 document.write(string)
+
+
+edwin=[{name:"edwin",age:"23"}]
