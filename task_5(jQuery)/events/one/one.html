@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
+
+    <script>
+        $(document).ready(function () {
+            $("h4").one("click", function () {
+                $(this).animate({ fontSize: "+=60px" })
+            })
+        })
+
+    </script>
+</head>
+
+<body>
+    <h4>EDWIN</h4>
+    <p>click on  EDWIN</p>
+
+
+</body>
+
+</html>
+
+
+
+$(document).ready(function(){
+    $("p").one("click", function(){
+      $(this).animate({fontSize: "+=6px"});
+    });
+  });

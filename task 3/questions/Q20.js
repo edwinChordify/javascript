@@ -1,12 +1,16 @@
-let n=5
-let num = 1;
 
+const prompt = require("prompt-sync")();
+let numRows=prompt("enter the rows")
+  let number = 1;
+  let result = '';
 
-for (let i = 1; i <= n; i++) {
-  let n= '';
-  for (let j = 1; j <= i; j++) {
-    n+= num+ ' ';
-    n++;
+  for (let i = 1; i <= numRows; i++) {
+    for (let j = 1; j <= i; j++) {
+      result += `${number} `;
+      
+      number++
+    }
+    result += '\n';
   }
-  console.log(n);
-}
+
+  console.log(result);

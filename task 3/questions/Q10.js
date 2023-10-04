@@ -17,9 +17,9 @@ for (i = 1; i <= n; i++) {
 
 
 
-function swapArrays(arr1, arr2) {
+function swapArrays(arr1) {
     for (let i = 0; i < arr1.length; i++) {
-        // Swap elements at the same index
+        
         const temp = firstArray[i];
         firstArray[i] = secondArray[i];
         secondArray[i] = temp;

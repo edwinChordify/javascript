@@ -24,5 +24,5 @@ function checkGrade(grade) {
     }
 
 }
-const result = checkGrade(23)
+const result = checkGrade(53)
 console.log(result)

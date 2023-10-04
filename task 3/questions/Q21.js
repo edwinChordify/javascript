@@ -7,4 +7,13 @@ for (i = 1; i <= n; i++) {
     let values = prompt(`enter the ARRAY_1 values  ${i}`)
     firstArray.push(values)
 }
-console.log(fir);
+console.log(firstArray);
+
+
+const secondArray = []
+for (i = 0; i < firstArray.length - 1; i++) {
+    const sum = firstArray[i] * firstArray[i + 1]
+    secondArray.push(sum)
+
+}
+console.log(secondArray);
