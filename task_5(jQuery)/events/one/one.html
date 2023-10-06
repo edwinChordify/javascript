@@ -9,7 +9,7 @@
 
     <script>
         $(document).ready(function () {
-            $("h4").one("click", function () {
+            $("#hh").one("click", function () {
                 $(this).animate({ fontSize: "+=60px" })
             })
         })
@@ -18,7 +18,7 @@
 </head>
 
 <body>
-    <h4>EDWIN</h4>
+    <h4 id="hh">EDWIN</h4>
     <p>click on  EDWIN</p>
 
 
@@ -28,8 +28,3 @@
 
 
 
-$(document).ready(function(){
-    $("p").one("click", function(){
-      $(this).animate({fontSize: "+=6px"});
-    });
-  });

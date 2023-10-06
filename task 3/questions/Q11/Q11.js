@@ -1,4 +1,4 @@
-const prompt = require("prompt-sync")();
+
 const n = prompt("enter array length")
 const arr1 = []
 for (i = 1; i <= n; i++) {
@@ -14,4 +14,4 @@ for (i = 0; i <= n; i++) {
     }
 
 }
-console.log(`Number of even numbers in the given array is ${evenArr.length}`)
+alert(`Number of even numbers in the given array is ${evenArr.length}`)

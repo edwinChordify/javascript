@@ -8,12 +8,12 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
     <script>
         $(document).ready(function () {
-            $("p").click(function () {
+            $(".pp").click(function () {
                 $(this).slideToggle()
             })
 
-            $("button").click(function () {
-                $("p").unbind()
+            $("#toggle").click(function () {
+                $(".pp").unbind()
             })
         })
     </script>
@@ -21,11 +21,11 @@
 </head>
 
 <body>
-    <p>this will toggle</p>
-    <p>this will toggle</p>
-    <p>this will toggle</p>
-    <p>this will toggle</p>
-    <button>cancel toggle mode</button>
+    <p class="pp">this will toggle</p>
+    <p class="pp">this will toggle</p>
+    <p class="pp">this will toggle</p>
+    <p class="pp">this will toggle</p>
+    <button id="toggle">cancel toggle mode</button>
 </body>
 
 </html>

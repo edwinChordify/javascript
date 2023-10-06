@@ -1,4 +1,4 @@
-let day = 6
+let day = parseInt(prompt("enter day number"))
 let dayName
 switch (day) {
     case 1:
@@ -27,4 +27,4 @@ switch (day) {
 
 
 }
-console.log(dayName)
+alert(dayName)

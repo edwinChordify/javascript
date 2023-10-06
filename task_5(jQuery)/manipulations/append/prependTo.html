@@ -7,6 +7,11 @@
     <title>Document</title>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
     <script>
+        $(document).ready(function(){
+        $("#buton").click(function(){
+            $("<b>edwin</b>").prependTo("#pp")
+        })
+    })
        
     </script>
 
@@ -14,6 +19,8 @@
 </head>
 
 <body>
+    <p id="pp">antony</p>
+    <button id="buton">click here</button>
     
 
 </body>

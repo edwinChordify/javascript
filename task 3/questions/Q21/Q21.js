@@ -1,4 +1,4 @@
-const prompt = require("prompt-sync")();
+
 
 let n = prompt("Enter the size of an Array: ")
 const firstArray = []
@@ -16,4 +16,4 @@ for (i = 0; i < firstArray.length - 1; i++) {
     secondArray.push(sum)
 
 }
-console.log(secondArray);
+alert(secondArray);

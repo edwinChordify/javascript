@@ -8,8 +8,8 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
     <script>
         $(document).ready(function(){
-          $("button").click(function(){
-            $("p").clone().appendTo("div");
+          $("#buton").click(function(){
+            $("#pp").clone().appendTo("div");
           });
         });
         </script>
@@ -19,10 +19,10 @@
 
 <body>
    
-<p>This is a paragraph.</p>
-<p>This is another paragraph.</p>
+<p id="pp">This is a paragraph.</p>
+<p id="pp">This is another paragraph.</p>
 
-<button>Clone to div</button>
+<button id="buton">Clone to div</button>
 
 <div style="width: 100px; height: 200px; background-color: aquamarine;">
     

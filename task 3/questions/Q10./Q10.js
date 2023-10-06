@@ -1,4 +1,4 @@
-const prompt = require("prompt-sync")();
+
 
 let n = prompt("Enter the size of an Array: ")
 const firstArray = []

@@ -1,4 +1,4 @@
-const prompt = require("prompt-sync")()
+//const prompt = require("prompt-sync")()
 
  
 
@@ -20,7 +20,7 @@ function tax(income){
 
         
 
-        return console.log(taxpay);
+        return alert(taxpay);
 
         
 
@@ -30,7 +30,7 @@ function tax(income){
 
         taxpay=income*.05
 
-        return console.log(taxpay);
+        return alert(taxpay);
 
         
 
@@ -40,7 +40,7 @@ function tax(income){
 
         taxpay=income*.2
 
-        return console.log(taxpay);
+        return alert(taxpay);
 
         
 
@@ -56,7 +56,7 @@ else if(income<5000000){
 
     taxpay=income*.3
 
-    return console.log(taxpay);
+    return alert(taxpay);
 
 }
 
