@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+
+    <script src="/index.js"></script>
+    <style>
+        table,
+        th,
+        td {
+            border: 1px solid black
+        }
+    </style>
+</head>
+
+<body>
+    <form>
+        <input class="val" type="text" placeholder="enter your name">
+        <input class="val" type="text" placeholder="enter your gmail">
+        <input class="val" type="text" placeholder="enter yout phone">
+        <button onclick="pushValues()">submit</button>
+
+    </form>
+
+    <table>
+
+        <tr>
+            <th>Name</th>
+            <th>phone</th>
+            <th>email</th>
+        </tr>
+
+
+        <tr>
+            <th>
+                <p id="name">edeqd</p>
+            </th>
+            <th>
+                <p id="phone"></p>
+            </th>
+            <th>
+                <p id="email"></p>
+            </th>
+            <th><button>delete</button></th>
+
+        </tr>
+
+
+    </table>
+
+</body>
+<script>
+
+
+
+    $(document).ready(function () {
+
+        $('button').click(function () {
+            $("p").empty()
+        })
+    })
+
+    const items = [];
+
+    function pushValues(){
+        const boxvalue = document.getElementById("val").value
+        items.push(boxvalue)
+        console.log(items);
+
+
+    }
+    console.log(items);
+
+
+
+</script>
+
+</html>

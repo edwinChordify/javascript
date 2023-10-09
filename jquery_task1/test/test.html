@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Form Submission</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+
+</head>
+<style>
+    table,
+    th,
+    td {
+        border: 1px solid black
+    }
+</style>
+
+<body>
+    <label for="inputValue">Enter a valur</label>
+    <input type="text" id="inputValue" required>
+    <input type="text" id="age" required>
+    <input type="text" id="email" required>
+    <button onclick="addValueToArray()">Add to Array</button>
+
+    <ul id="valueList"></ul>
+
+
+
+    <table>
+
+        <tr>
+            <th>Name</th>
+            <th>phone</th>
+            <th>email</th>
+        </tr>
+
+
+        <tr>
+            <th>
+                <p id="ffd">wff</p>
+            </th>
+            <th>
+                <p id="ded">wfwf</p>
+            </th>
+            <th>
+                <p id="v">sfsfwf</p>
+            </th>
+            <th><button>delete</button></th>
+
+        </tr>
+
+
+    </table>
+    <script>
+
+        $(document).ready(function () {
+
+            $('button').click(function () {
+                $("p").empty()
+            })
+        })
+
+
+    </script>
+
+    <script src="test.js"></script>
+</body>
+
+</html>
