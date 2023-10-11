@@ -15,19 +15,36 @@ function Form() {
 
 
 
-
-
-
     const submitButton = (e) => {
         e.preventDefault();
         console.log("First name :", fname)
         console.log("Last Name :", lname)
         console.log("age:", age)
         console.log("email :", mail)
+    
 
 
+        
 
+        if (fname == '') {
+            alert("please enter your name")
+        } else if (lname == '') {
+            alert("please enter your last name")
+
+        } else if (isNaN(age)) {
+            alert("enter age in numeric value only")
+        }
+        else if (mail == '') {
+            alert("please enter your E-mail")
+        }
     }
+
+
+
+
+
+
+
 
 
 
@@ -35,15 +52,15 @@ function Form() {
         <form className="forr" onSubmit={submitButton} >
             <div className="colo">
                 <div>
-                    <span>  <h2>First Name</h2>       <input type="text" name="fname" onChange={(e) => Setfname(e.target.value)} required /> <br />
+                    <span>  <h2>First Name</h2>       <input type="text" name="fname" onChange={(e) => Setfname(e.target.value)} /> <br />
                     </span>
 
                 </div>
-                <div> <span>    <h2>Last Name</h2>        <input type="text" name="lname" onChange={(e) => Setlname(e.target.value)} required /><br />
+                <div> <span>    <h2>Last Name</h2>        <input type="text" name="lname" onChange={(e) => Setlname(e.target.value)} /><br />
                 </span></div>
-                <div><span>      <h2>Age</h2>     <input type="text" name="age" onChange={(e) => Setage(e.target.value)} required /><br />
+                <div><span>      <h2>Age</h2>     <input type="text" name="age" onChange={(e) => Setage(e.target.value)} /><br />
                 </span></div>
-                <div> <span>      <h2>Email</h2>     <input type="text" name="email" onChange={(e) => Setlmail(e.target.value)} required /><br />
+                <div> <span>      <h2>Email</h2>     <input type="text" name="email" onChange={(e) => Setlmail(e.target.value)} /><br />
                 </span></div>
 
 
