@@ -5,15 +5,12 @@
 
 function Form() {
 
-    const [state, Setstate] = React.useState({
-        fname: '',
-        lname: '',
-        age: "",
-        email: ''
-    })
-    //const [lname, Setlname] = React.useState("")
-    // const [age, Setage] = React.useState("")
-    //const [mail, Setlmail] = React.useState("")
+    const [fname, Setfname] = React.useState("")
+
+
+    const [lname, Setlname] = React.useState("")
+    const [age, Setage] = React.useState("")
+    const [mail, Setlmail] = React.useState("")
 
 
 
@@ -23,36 +20,30 @@ function Form() {
 
     const submitButton = (e) => {
         e.preventDefault();
-        console.log(state)
-        //console.log("Last Name :", lname)
-        //console.log("age:", age)
-        //console.log("email :", mail)
+        console.log("First name :", fname)
+        console.log("Last Name :", lname)
+        console.log("age:", age)
+        console.log("email :", mail)
 
 
 
     }
 
-    const statemanage = (e) => {
 
-        Setstate((state) => ({
-            ...state,
-            [e.target.name]: e.target.value
-        }));
-    }
 
     return (
-        <form className="forr" onSubmit={submitButton}>
+        <form className="forr" onSubmit={submitButton} >
             <div className="colo">
                 <div>
-                    <span>  <h2>First Name</h2>       <input type="text" name="fname" onChange={statemanage} required /><br />
+                    <span>  <h2>First Name</h2>       <input type="text" name="fname" onChange={(e) => Setfname(e.target.value)} required /> <br />
                     </span>
 
                 </div>
-                <div> <span>    <h2>Last Name</h2>        <input type="text" name="lname" onChange={statemanage} required /><br />
+                <div> <span>    <h2>Last Name</h2>        <input type="text" name="lname" onChange={(e) => Setlname(e.target.value)} required /><br />
                 </span></div>
-                <div><span>      <h2>Age</h2>     <input type="text" name="age" onChange={statemanage} required /><br />
+                <div><span>      <h2>Age</h2>     <input type="text" name="age" onChange={(e) => Setage(e.target.value)} required /><br />
                 </span></div>
-                <div> <span>      <h2>Email</h2>     <input type="text" name="email" onChange={statemanage} required /><br />
+                <div> <span>      <h2>Email</h2>     <input type="text" name="email" onChange={(e) => Setlmail(e.target.value)} required /><br />
                 </span></div>
 
 
@@ -70,7 +61,7 @@ function Form() {
 
 
 
-        </form>
+        </form >
 
     )
 }
