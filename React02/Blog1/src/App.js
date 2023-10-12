@@ -8,7 +8,8 @@ import { useForm } from 'react-hook-form'
 
 function App() {
   const { register, handleSubmit, watch, formState: { errors } } = useForm()
-  //console.log(watch())
+  console.log("testing")
+  console.log(register("firstName", { required: "this is required" }))
   return (
     <div>
       <form className="forr" onSubmit={handleSubmit((data) => {

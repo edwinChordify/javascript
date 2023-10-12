@@ -1,0 +1,32 @@
+.forr {
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  height: 100%;
+
+
+  display: flex;
+
+
+}
+
+.colo {
+  justify-content: center;
+  text-align: center;
+  background-color: white;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  padding: 40px;
+  width: 600px;
+  box-shadow: 5px 10px 10px #383737;
+}
+
+.but {
+  height: 40px;
+  background-color: blue;
+  color: white;
+  border-radius: 20px;
+  border: none;
+
+}
