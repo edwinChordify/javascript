@@ -1,22 +1,53 @@
 import logo from './logo.svg';
 import './App.css';
-import States from './States';
-import Form from './Form';
+import { useState } from "react";
+import { useForm } from 'react-hook-form'
+
+
 
 
 function App() {
-
-
-return (
-  <div className="App">
-    <States name={"irene"} school={"blooming buds bethania"} />
-    <States name={"avlin"} />  <States name={"tree"} />  <States name={"leo"} />
+  const { register, handleSubmit, watch, formState: { errors } } = useForm()
+  //console.log(watch())
+  return (
     <div>
-      <Form />
+      <form className="forr" onSubmit={handleSubmit((data) => {
+        console.log(data);
+      })} >
+        <div className="colo">
+          <div>
+            <span>First Name<input type="text" {...register("firstName", { required: "this is required" })} />
+              <p>{errors.firstName?.message}</p> <br />
+            </span>
+          </div>
+          <div>
+            <span>Last Name<input type="text" {...register("lastName", { required: "this is required" })} />
+              <p>{errors.lastName?.message}</p><br />
+            </span>
+          </div>
+          <div>
+            <span> Age<input type="text" name="age" {...register("age", {
+              required: "this is required",maxLength:{
+                value:2,
+                message:"min length is 2"
+              }}
+            )} />
+              <p>{errors.age?.message}</p><br />
+            </span>
+          </div>
+          <div>
+            <span>Email<input type="text" {...register("email", { required: "this is required" })} />
+              <p>{errors.email?.message}</p><br />
+              <br />
+            </span>
+          </div>
+          <button className="but">SUBMIT</button>,
+        </div>
+      </form >
     </div>
 
-  </div>
-);
+
+  );
 }
 
 export default App;
