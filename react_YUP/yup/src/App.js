@@ -18,52 +18,33 @@ function App() {
     firstName: yup.string().required("first name is required"),
     LasttName: yup.string().required("Last Name is required"),
     age: yup.string().max(2).required("Age is required"),
-    email: yup.string().email().required("E-mail is required")
+    email: yup.string().email().required("E-mail is required"),
+    state:yup.string().required("please select state"),
+    district:yup.string().required()
+
   })
   const states = ["kerala", "tamilnadu", "karnataka"]
   const district = {
-    "kerala": ["a", "b", "c", "d"],
-    "tamilnadu": ["e", "f", "g", "h"],
-    "karnataka": ["i", "j", "k", "l"]
+    "kerala": ["thrissur", "palakkad", "kannur", "idukki"],
+    "tamilnadu": ["test 1", "test 2", "test 3", "test 4"],
+    "karnataka": ["sample 1", "sample 2", "sample 3", "sample 4"]
 
   }
   const [selectedState, setselectedState] = useState('')
 
-  const { register, handleSubmit, formState: { errors }, reset } = useForm({
+  const { register, handleSubmit, watch,  formState: { errors }, reset } = useForm({
     resolver: yupResolver(schema)
   })
+  const statevalue=watch('state')
   return (
     <div>
-      {console.log(selectedState)}
-      <div>
-        select cities:
-        <select onChange={(e) => { setselectedState(e.target.value) }}>
-          {
-            states.map(state => {
-              return <option>{state}</option>
-            })
-          }
-        </select><br />
-
-
-        select district:
-
-        {selectedState ? (
-          <select>
-            {
-              district[selectedState].map(city => (
-                <option>{city}</option>
-
-              ))
-            }
-
-          </select>) : ''}
-      </div>
-      
       <form className="forr" onSubmit={handleSubmit((data) => {
-        console.log(data);
-
+       console.log(data);
+       reset()
+        
       })} >
+        
+
         <div className="colo">
           <div>
             <span>First Name<input type="text"{...register("firstName")} />
@@ -90,6 +71,32 @@ function App() {
             </span>
             <p>{errors.email?.message}</p>
 
+          </div>
+          <div>
+            select cities:
+            <select {...register("state")} >
+              <option value={''}>select state</option>
+              {
+                states.map(state => {
+                  return <option >{state}</option>
+                })
+              }
+            </select>
+            <p>{errors.state?.message}</p>
+<br /><br />
+            select district:
+            { (
+              <select {...register("district")}>
+                <option value={''}>select district</option>
+                {
+                 statevalue && district[statevalue].map(city => (
+                    <option>{city}</option>
+
+                  ))
+                }
+
+              </select>) }
+              <p>{errors.district?.message}</p>
           </div>
           <button className="but">SUBMIT</button>,
         </div>
