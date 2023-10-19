@@ -1,11 +1,28 @@
 
 import './App.css';
-import { useState } from 'react';
+import React, { useState } from 'react';
+import { DragDropContext, Droppable, Draggable } from "react-beautiful-dnd";
+
 
 function App() {
   const [input, Setinput] = useState("")
   const [todo, settodo] = useState([])
-  const [editId, seteditId] = useState(0)
+
+
+
+
+  const onDragEnd = (result) => {
+    console.log(result);
+    if (!result.destination) return;
+
+    const items = Array.from(todo);
+    const [reorderedItem] = items.splice(result.source.index, 1);
+    items.splice(result.destination.index, 0, reorderedItem);
+
+    settodo(items);
+  }
+
+
 
 
   const addTodo = () => {
@@ -18,17 +35,18 @@ function App() {
 
 
 
-    if (editId) {
-      const updatedTodo = todo.map((item) =>
-        item.id === editId ? { ...item, list: input } : item
-      );
-      settodo(updatedTodo);
+
+    /*if (editId) {
+     // const updatedTodo = todo.map((item) =>
+       // item.id === editId ? { ...item, list: input } : item
+      //);
+      //settodo(updatedTodo);
       seteditId(0);
       Setinput('');
       return; // Return early to avoid the subsequent code
-    }
+    }*/
 
-    // console.log(todo);
+    console.log(todo);
 
   }
 
@@ -43,59 +61,69 @@ function App() {
       num.id !== id))
 
   }
-  const onEdit = (id) => {
-    const editedTodo = todo.find((num) => num.id === id);
-    Setinput(editedTodo.list);
-    seteditId(editedTodo.id);
-  };
+  /*const onEdit = (id) => {
+  const editedTodo = todo.find((num) => num.id === id);
+ Setinput(editedTodo.list);
+ seteditId(editedTodo.id);
+ };*/
 
-
-
-  // const onEdit = (id) => {
-  //   const editedId = todo.find((num) => num.id === id)
-  //   settodo(editedId.list)
-  //   // console.log(editedId.list);
-
-
-  // }
 
   return (
     <div>
       <h1>To-Do App</h1>
-
-
       <form onSubmit={handleSubmit}>
         <input type="text" placeholder='type your text here' value={input} onChange={(event) => { Setinput(event.target.value) }} />
-        <button onClick={addTodo}>{editId ? 'EDIT' : ' ADD'}</button>
+        <button onClick={addTodo}>add</button>
       </form>
-
-
-      <div className='list'>
-        <ul>
-          {/* { 
-            todo.map((num) => (
-              <li>{num.list}
-                <span><button onClick={() => onEdit(num.id)}>edit</button></span>
-                <span><button onClick={() => onDelete(num.id)}>delete</button></span>
-              </li>))
-
-          } */}
-          {
-            todo.map((num) => (
-              <li key={num.id}>{num.list}
-                <span><button onClick={() => onEdit(num.id)}>edit</button></span>
-                <span><button onClick={() => onDelete(num.id)}>delete</button></span>
-              </li>
-            ))
-          }
-
-        </ul>
-
-      </div >
-
-
+      <div>
+        <DragDropContext onDragEnd={onDragEnd}>
+          <Droppable droppableId="todo">
+            {(provided) => (
+              <div ref={provided.innerRef} {...provided.droppableProps}>
+                {todo.map((task, index) => (
+                  <Draggable
+                    key={task.id}
+                    draggableId={task.id.toString()}
+                    index={index}
+                  >
+                    {(provided) => (
+                      <div
+                        {...provided.draggableProps}
+                        {...provided.dragHandleProps}
+                        ref={provided.innerRef}
+                      >
+                        <div className='list'>
+                          <ul>
+                            <li key={task.id}>{task.list}
+                              <span><button onClick={() => onDelete(task.id)}>delete</button></span>
+                            </li>
+                          </ul>
+                        </div >
+                      </div>
+                    )}
+                  </Draggable>
+                ))}
+                {provided.placeholder}
+              </div>
+            )}
+          </Droppable>
+        </DragDropContext>
+      </div>
     </div >
   );
 }
 
 export default App;
+
+
+
+
+
+
+
+
+
+
+
+
+
