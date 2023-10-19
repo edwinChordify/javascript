@@ -9,20 +9,23 @@ function App() {
 
 
   const addTodo = () => {
-    if (todo !== '') {
+    if (input !== '') {
       settodo([...todo, { list: input, id: Date.now() }])
       console.log(todo);
       Setinput("")
 
     }
-    if(editId){
-      const editTodo=todo.find((num)=>num.id==editId)
-      const updateTodo=todo.map((num)=>num.id===editTodo.id
-      ?(num={id:num.id,list:todo})
-      :(num={id:num.id,list:num.list}))
-      settodo(updateTodo)
-      seteditId(0)
-      settodo('')
+
+
+
+    if (editId) {
+      const updatedTodo = todo.map((item) =>
+        item.id === editId ? { ...item, list: input } : item
+      );
+      settodo(updatedTodo);
+      seteditId(0);
+      Setinput('');
+      return; // Return early to avoid the subsequent code
     }
 
     // console.log(todo);
@@ -43,8 +46,9 @@ function App() {
   const onEdit = (id) => {
     const editedTodo = todo.find((num) => num.id === id);
     Setinput(editedTodo.list);
-    seteditId(editedTodo.id)
-  }
+    seteditId(editedTodo.id);
+  };
+
 
 
   // const onEdit = (id) => {
