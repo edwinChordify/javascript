@@ -1,67 +1,68 @@
 const express = require('express');
-const mongoose = require('mongoose')
-const bodyParser=require('body-parser')
+const mongoose = require('mongoose');
+const bodyParser = require('body-parser');
 const app = express();
 
 mongoose.connect('mongodb://127.0.0.1:27017/test')
-    .then(() => console.log('Database Connected!')).catch((err) => {
+    .then(() => console.log('Database Connected!'))
+    .catch((err) => {
         console.log('error', err);
-    })
+    });
 
+app.use(bodyParser.urlencoded({ extended: true }));
 
-app.use(bodyParser.urlencoded());
+const User = mongoose.model('User', { name: String, age: Number, gender: String });
+const Todo = mongoose.model('Todo', { title: String, description: String });
 
-
-
-
-const User = mongoose.model('User', { name: String, age: Number, gender: String })
-
-
-
-const port = 7000;
+const port = 4001;
 
 app.get('/', function (req, res) {
-    res.send('Hello World!');
+    User.find().then((data) => {
+        console.log("here are the user details", data);
+    }).catch((err) => {
+        console.log("error", err);
+    });
 });
 
-
-app.get('/page', function (req, res) {
-    res.send('Hello Page!');
-})
-
 app.post('/page-post', function (req, res) {
-    const userData = new User()
-    userData.name = req.body.name
-    userData.age = req.body.age
-    userData.gender = req.body.gender
+    const userData = new User();
+    userData.name = req.body.name;
+    userData.age = req.body.age;
+    userData.gender = req.body.gender;
 
     userData.save().then((data) => {
         console.log('user saved', data);
+        res.send('Hi there this is a post request');
     }).catch((err) => {
         console.log('error', err);
-    })
-
-    res.send('Hi there this is a post request');
+    });
 });
 
+app.post('/addToDo', function (req, res) {
+    const addToDo = new Todo();
+    addToDo.title = req.body.title;
+    addToDo.description = req.body.description;
 
-app.put('/page-put', function (req, res) {
-    console.log(" body data put", req.body);
-    res.send('Hi there this is a put request');
+    addToDo.save().then((data) => {
+        res.send("todo added")
+        console.log('Todo', data);
+    }).catch((err) => {
+        console.log('error', err);
+    });
 });
+app.get('/eachTask', function (req, res) {
+    Todo.findById("654dfc89d1993e1143e93008").then((data) => {
+        res.send("requested todo detail")
+        console.log('Todo', data);
 
+    }).catch((err) => {
+        console.log('error', err);
+    });
+})
 
-app.delete('/page-delete', function (req, res) {
-    res.send('Hi there this is a delete request');
-});
-
-app.patch('/page-patch', function (req, res) {
-    console.log(" body data patch", req.body.age);
-    res.send('Hi there this is a patch request');
-});
 
 
 
 app.listen(port, () => {
-    console.log(`Example app listening on port ${port}`)
-})
+    console.log(`Example app listening on port ${port}`);
+});
