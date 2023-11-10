@@ -3,13 +3,13 @@ import React from 'react'
 export const MyContexts = createContext();
 
 
-const Mycontext = ({children}) => {
-    const [items,setItems]=useState([])
+const MyContextProvider = ({ children }) => {
+  const [values, setValues] = useState([])
   return (
-    <MyContexts.Provider value={{items,setItems}}>
-        {children}
+    <MyContexts.Provider value={{ values, setValues }}>
+      {children}
     </MyContexts.Provider>
   )
 }
 
-export default Mycontext
+export default MyContextProvider

@@ -7,44 +7,36 @@ import { MyContext, MyContexts } from './Mycontext';
 
 
 const Wishlist = () => {
-    const { items, setItems } = useContext(MyContexts)
-
-    // const [itemsWish, setItemsWish] = useState([]);
-
-    // useEffect(() => {
-    //   setItemsWish(JSON.parse(localStorage.getItem("items")) || ["wishlisted items empty"]);
-    //}, []);
-
-  
+    const { values, setValues } = useContext(MyContexts)
+    console.log(values);
+    const val=values
 
 
+    localStorage.setItem("items", JSON.stringify(val));
 
 
 
 
     return (
-        <div><h1>Wishlist Component</h1>
-            {
-                items ?
-
-                    <div>
-                        {items.map((item, index) => (
-                            <span key={index}>
-                                <p>{item}</p>
-                            </span>
-                        ))}
-                    </div> : 'no items in wishlist'
-            }
-
-
-
-
-
+        <div>
+            <h1>Wishlist Componnt</h1>
+            {values.length > 0 ? (
+                <div>
+                    {values.map((value, index) => (
+                        <span key={index}>
+                            <p>{value}</p>
+                        </span>
+                    ))}
+                </div>
+            ) : (
+                'No items in wishlist'
+            )}
 
             <div>
                 <Link to={'/'}><button>Product</button></Link>
             </div>
         </div>
+
     )
 }
 
