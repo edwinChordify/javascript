@@ -12,7 +12,7 @@ mongoose.connect('mongodb://127.0.0.1:27017/test')
 app.use(bodyParser.urlencoded({ extended: true }));
 
 const User = mongoose.model('User', { name: String, age: Number, gender: String });
-const Todo = mongoose.model('Todo', { title: String, description: String });
+const Todo = mongoose.model('Todo', { title: String, description: String, userID: String });
 
 const port = 4001;
 
@@ -42,6 +42,8 @@ app.post('/addToDo', function (req, res) {
     const addToDo = new Todo();
     addToDo.title = req.body.title;
     addToDo.description = req.body.description;
+    addToDo.userID = req.body.userID;
+
 
     addToDo.save().then((data) => {
         res.send("todo added")
@@ -58,6 +60,17 @@ app.get('/eachTask', function (req, res) {
     }).catch((err) => {
         console.log('error', err);
     });
+})
+
+app.post('/indiTodo',function(req,res){
+    id=req.body.id
+    Todo.find({userID:id}).then((data)=>[
+
+        res.send(data)
+
+    ]).catch((err)=>{
+        res.send(err)
+    })
 })
 
 
