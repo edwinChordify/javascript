@@ -1,19 +1,24 @@
 const express = require('express')
+const cors = require('cors')
 const mongoose = require('mongoose')
 const bcrypt = require('bcryptjs')
 const bodyParser = require('body-parser');
 const json = require('jsonwebtoken')
 const app = express()
+app.use(cors())
+app.use(express.json())
 
-mongoose.connect('mongodb://127.0.0.1:27017/test')
+mongoose.connect('mongodb://127.0.0.1:27017/temp')
     .then(() => console.log("dadtabase conncetd"))
     .catch((err) => {
         console.log("error", err);
     })
 
-const UserDatabase = mongoose.model('UserDatabase', { name: String, email: String, password: String });
+const User = mongoose.model('User', { name: String, email: String, password: String, mobile: Number });
 
-const port = 9000
+const port = 8000
+const jwtsecret = '32716b297df0651e2867c59195e1c07a983e68642abfbdb6fa16892bb453cda91e3b1c'
+
 
 app.use(bodyParser.urlencoded({ extended: true }));
 
@@ -22,14 +27,19 @@ app.get('/', (req, res) => {
     res.send("hello world")
 })
 
+
+
+
 app.post('/user/signup', async function (req, res) {
     try {
-        const passwordtemp = req.body.password
-        const hash = await bcrypt.hash(passwordtemp, 10)
-        const userData = new UserDatabase()
+
+        const userData = new User()
         userData.name = req.body.name
         userData.email = req.body.email
-        userData.password = hash
+        userData.mobile = req.body.mobile
+
+        const hashedPassword =await  bcrypt.hash(req.body.password, 10);
+        userData.password = hashedPassword;
         await userData.save()
         res.status(200).json({
             message: "user successfully created",
@@ -39,15 +49,16 @@ app.post('/user/signup', async function (req, res) {
 
 
     catch (error) {
-        console.log("error");
-        res.status(500).json(error)
+        console.log(error);
+        res.send(error)
     }
 })
 app.post('/user/login', async function (req, res) {
     const email = req.body.email
     const password = req.body.password
     try {
-        const user = await UserDatabase.findOne({ email: email })
+        const user = await User.findOne({ email: email })
+        console.log(user);
         if (!user) {
             res.status(200).json({
                 message: "user not available"
@@ -61,8 +72,8 @@ app.post('/user/login', async function (req, res) {
 
             const acessToken = json.sign(tokenPayload, 'SECRET')
             res.status(200).json({
-                status: 'sucess',
-                message: 'User Logged in',
+                status: 'success',
+                message: 'User Logggged in',
                 data: {
                     acessToken,
                 }
@@ -75,12 +86,14 @@ app.post('/user/login', async function (req, res) {
         }
 
 
-    }catch (error) {
+    } catch (error) {
         console.log("some error is there");
         res.status(500).json(error)
 
     }
 })
+
+
 
 app.listen(port, () => {
     console.log(`server is running at ${port}`);
