@@ -8,49 +8,58 @@ const User = require('../models/user')
 
 
 const Authentication = async (req, res, next) => {
-    try{
+    try {
 
-    
-    const apitoken = req.body.tokenapi
-    const data = jwt.verify(apitoken,jwtsecret)
-    const userData = await User.findOne({email:data.email})
-    if (!userData) {
-        return res.status(401).json({ message: "User not found" })
+
+        const apitoken = req.body.tokenapi
+        const data = jwt.verify(apitoken, jwtsecret)
+        const userData = await User.findOne({ email: data.email })
+        if (!userData) {
+            return res.status(401).json({ message: "User not found" })
+        }
+        else {
+
+            next()
+
+        }
+    } catch (error) {
+        res.status(401).json(error)
+
     }
-    else {
-
-        next()
-
-    }
-}catch(error){
-    res.status(401).json(error)
-
-}
 
 
 }
 
 const registerLogic = async function (req, res) {
-    try {
-
-        const userData = new User()
-        userData.name = req.body.name
-        userData.email = req.body.email
-        userData.mobile = req.body.mobile
-
-        const hashedPassword = await bcrypt.hash(req.body.password, 10);
-        userData.password = hashedPassword;
-        await userData.save()
-        res.status(200).json({
-            message: "user successfully created",
-
-        })
-    }
+    const email=req.body.email
+    const prevUser = await User.findOne({ email })
+    if (prevUser) {
+        res.status(402).json("user already exist")
+        console.log("user already exist");
+    } else {
 
 
-    catch (error) {
-        console.log(error);
-        res.send(error)
+        try {
+
+            const userData = new User()
+            userData.name = req.body.name
+            userData.email = req.body.email
+            userData.mobile = req.body.mobile
+
+            const hashedPassword = await bcrypt.hash(req.body.password, 10);
+            userData.password = hashedPassword;
+            await userData.save()
+            res.status(200).json({
+                message: "user successfully created",
+
+            })
+        }
+
+
+        catch (error) {
+            console.log(error);
+            res.send(error)
+        }
     }
 }
 
@@ -68,10 +77,10 @@ const loginLogic = async function (req, res) {
         } else if
             (await bcrypt.compare(password, user.password)) {
             const tokenPayload = {
-                email:email
+                email: email
             }
 
-            const acessToken = jwt.sign({email:email}, jwtsecret)
+            const acessToken = jwt.sign({ email: email }, jwtsecret)
             res.status(200).json({
                 status: 'success',
                 message: 'User Logged in',
@@ -94,6 +103,7 @@ const loginLogic = async function (req, res) {
     }
 }
 const updateName = async function (req, res) {
+
 
     try {
         const { name, id } = req.body

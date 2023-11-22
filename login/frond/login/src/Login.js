@@ -19,6 +19,7 @@ function Login() {
 
 
         } catch (error) {
+            alert("enter username or password is incorrect")
             console.log('error')
         }
 
