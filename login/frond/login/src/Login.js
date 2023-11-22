@@ -16,7 +16,6 @@ function Login() {
         try {
             const registerresponse = await instance.post('/user/login', info);
             alert(registerresponse.data.message);
-            console.log(data);
 
 
         } catch (error) {
