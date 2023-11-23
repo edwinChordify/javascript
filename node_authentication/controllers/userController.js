@@ -45,6 +45,7 @@ const registerLogic = async function (req, res) {
             userData.name = req.body.name
             userData.email = req.body.email
             userData.mobile = req.body.mobile
+            userData.filename=req.file.path
 
             const hashedPassword = await bcrypt.hash(req.body.password, 10);
             userData.password = hashedPassword;
